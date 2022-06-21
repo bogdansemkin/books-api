@@ -16,3 +16,7 @@ func NewAuthService(repos repository.Authorization) *AuthService{
 func (s *AuthService) Create(user model.User) (int, error){
 	return s.repos.Create(user)
 }
+
+func (s *AuthService) Get(name, password string) (model.User, error){
+	return s.repos.Get(name, password)
+}
