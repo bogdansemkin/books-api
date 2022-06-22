@@ -36,6 +36,5 @@ func (r *AuthPostgres) Get(name, password string) (model.User, error){
 	if err != nil {
 		log.Fatalf("Error during getting data, %s", err)
 	}
-	log.Printf("User name and password : %s ", user)
 	return user, nil
 }
