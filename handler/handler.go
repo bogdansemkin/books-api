@@ -20,5 +20,14 @@ func (h *Handler) InitRoutes() *gin.Engine{
 		auth.POST("/sign-in", h.signIn)
 	}
 
+	books := router.Group("/books")
+	{
+		books.GET("", h.getAll)
+		books.GET("/:id", h.getById)
+		books.POST("", h.create)
+		books.PATCH("/id", h.update)
+		books.DELETE("/:id", h.delete)
+	}
+
 	return router
 }
