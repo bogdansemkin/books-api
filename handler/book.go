@@ -7,7 +7,18 @@ import (
 	"net/http"
 	"strconv"
 )
-
+// @Summary Get all books
+// @Security ApiKeyAuth
+// @Tags books
+// @Description get books
+// @ID get-all-books
+// @Accept  json
+// @Produce  json
+// @Success 200 {integer} integer 1
+// @Failure 400,404
+// @Failure 500
+// @Failure default
+// @Router /books/ [get]
 func (h *Handler) getAll(c *gin.Context) {
 	book, err := h.services.GetAllBooks()
 	if err != nil {
@@ -16,7 +27,18 @@ func (h *Handler) getAll(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, book)
 }
-
+// @Summary Get book By Id
+// @Security ApiKeyAuth
+// @Tags books
+// @Description get book by id
+// @ID get-book-by-id
+// @Accept  json
+// @Produce  json
+// @Success 200 {integer} integer 1
+// @Failure 400,404
+// @Failure 500
+// @Failure default
+// @Router /books/:id [get]
 func (h *Handler) getById(c *gin.Context) {
 	id := c.Param("id")
 	//TODO fix from Atoi to normal code
@@ -30,7 +52,18 @@ func (h *Handler) getById(c *gin.Context) {
 
 	c.JSON(http.StatusOK, book)
 }
-
+// @Summary Create book
+// @Security ApiKeyAuth
+// @Tags books
+// @Description create book
+// @ID create-book
+// @Accept  json
+// @Produce  json
+// @Param input body model.Book true "Book info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404
+// @Failure 500
+// @Router /books/:id [post]
 func (h *Handler) create(c *gin.Context) {
 	book := model.Book{}
 
@@ -43,7 +76,19 @@ func (h *Handler) create(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "Book was created successfully")
 }
-
+// @Summary Update book
+// @Security ApiKeyAuth
+// @Tags books
+// @Description update book
+// @ID update-book
+// @Accept  json
+// @Produce  json
+// @Param input body model.Book true "Book info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404
+// @Failure 500
+// @Failure default
+// @Router /books/:id [patch]
 func (h *Handler) update(c *gin.Context) {
 	book := model.Book{}
 	id := c.Param("id")
@@ -59,6 +104,20 @@ func (h *Handler) update(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "Book was updated successfully")
 }
+
+// @Summary Delete book
+// @Security ApiKeyAuth
+// @Tags books
+// @Description delete book
+// @ID delete-book
+// @Accept  json
+// @Produce  json
+// @Param input body model.Book true "Book info"
+// @Success 200 {integer} integer 1
+// @Failure 400,404
+// @Failure 500
+// @Failure default
+// @Router /books/:id [delete]
 
 func (h *Handler) delete(c *gin.Context) {
 	//TODO delete govnocode
