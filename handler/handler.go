@@ -25,7 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine{
 		books.GET("", h.getAll)
 		books.GET("/:id", h.getById)
 		books.POST("", h.create)
-		books.PATCH("/id", h.update)
+		books.PATCH("/:id", h.update)
 		books.DELETE("/:id", h.delete)
 	}
 
