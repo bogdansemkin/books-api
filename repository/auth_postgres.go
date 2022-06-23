@@ -4,7 +4,7 @@ import (
 	"books-api/model"
 	"fmt"
 	"github.com/jmoiron/sqlx"
-	"log"
+	"github.com/sirupsen/logrus"
 )
 
 type AuthPostgres struct {
@@ -22,7 +22,7 @@ func (r *AuthPostgres) Create(user model.User) (int, error){
 
 	err := row.Scan(&id)
 	if err != nil {
-		log.Fatalf("error during scanning id, %s", err)
+		logrus.Errorf("error during scanning id, %s", err)
 		return 0, err
 	}
 	return id, nil
@@ -34,7 +34,7 @@ func (r *AuthPostgres) Get(name, password string) (model.User, error){
 
 	err := r.db.Get(&user, query, name, password)
 	if err != nil {
-		log.Fatalf("Error during getting data, %s", err)
+		logrus.Errorf("Error during getting data, %s", err)
 	}
 	return user, nil
 }

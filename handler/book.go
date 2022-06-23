@@ -3,7 +3,7 @@ package handler
 import (
 	"books-api/model"
 	"github.com/gin-gonic/gin"
-	"log"
+	"github.com/sirupsen/logrus"
 	"net/http"
 	"strconv"
 )
@@ -11,7 +11,7 @@ import (
 func (h *Handler) getAll(c *gin.Context) {
 	book, err := h.services.GetAllBooks()
 	if err != nil {
-		log.Fatalf("Error on getAll handler, %s", err)
+		logrus.Errorf("Error on getAll handler, %s", err)
 		return
 	}
 	c.JSON(http.StatusOK, book)
@@ -24,7 +24,7 @@ func (h *Handler) getById(c *gin.Context) {
 
 	book, err := h.services.GetBookById(newId)
 	if err != nil{
-		log.Fatalf("error during getting book by id, %s", err)
+		logrus.Errorf("error during getting book by id, %s", err)
 		return
 	}
 
@@ -36,7 +36,7 @@ func (h *Handler) create(c *gin.Context) {
 
 	err := c.BindJSON(&book)
 	if err != nil {
-		log.Fatalf("error during binding JSON, %s", err)
+		logrus.Errorf("error during binding JSON, %s", err)
 		return
 	}
 	h.services.CreateBook(book)
@@ -50,13 +50,14 @@ func (h *Handler) update(c *gin.Context) {
 
 	err := c.BindJSON(&book)
 	if err != nil{
-		log.Fatalf("error during binding JSON, %s", err)
+		logrus.Errorf("error during binding JSON, %s", err)
 		return
 	}
 	book.Id, _ = strconv.Atoi(id)
 
-	log.Printf("Book on update handler, %s", book)
 	h.services.UpdateBook(book)
+
+	c.JSON(http.StatusOK, "Book was updated successfully")
 }
 
 func (h *Handler) delete(c *gin.Context) {
@@ -66,9 +67,8 @@ func (h *Handler) delete(c *gin.Context) {
 
 	err := h.services.DeleteBook(newId)
 	if err != nil{
-		log.Fatalf("error during getting book by id, %s", err)
+		logrus.Errorf("error during getting book by id, %s", err)
 		return
 	}
 	c.JSON(http.StatusOK, "Book was deleted successfully")
-
 }

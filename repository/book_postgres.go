@@ -4,6 +4,7 @@ import (
 	"books-api/model"
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	"github.com/sirupsen/logrus"
 	"log"
 )
 
@@ -21,7 +22,7 @@ func (r *BookPostgres) GetAllBooks() ([]model.Book, error){
 	query := fmt.Sprintf("SELECT * FROM %s", booksTable)
 	err  := r.db.Select(&book, query)
 	if err != nil {
-		log.Fatalf("error during getting all data, %s", err)
+		logrus.Errorf("error during getting all data, %s", err)
 		return nil, err
 	}
 	return book, nil
@@ -33,7 +34,7 @@ func (r *BookPostgres) GetBookById(id int) (model.Book, error){
 	query := fmt.Sprintf("SELECT * FROM %s WHERE id = $1", booksTable)
 	err := r.db.Get(&book, query, id)
 	if err != nil{
-		log.Fatalf("error during getting data to book model on get book by id, %s", err)
+		logrus.Errorf("error during getting data to book model on get book by id, %s", err)
 		return model.Book{}, err
 	}
 
@@ -48,7 +49,7 @@ func (r *BookPostgres) CreateBook(book model.Book)  (int, error){
 
 	err := row.Scan(&id)
 	if err != nil{
-		log.Fatalf("error during scanning id on creating book, %s", err)
+		logrus.Errorf("error during scanning id on creating book, %s", err)
 		return 0, err
 	}
 	return id, nil
@@ -63,9 +64,8 @@ func (r *BookPostgres) UpdateBook(book model.Book) error{
 			"author": book.Author,
 			"id": 	book.Id,
 		})
-		log.Printf("Book was updated, %s", book)
 		if err != nil {
-			log.Fatalf("Error during exec on updating book, %s", err)
+			logrus.Errorf("Error during exec on updating book, %s", err)
 			return err
 		}
 	}
@@ -76,9 +76,8 @@ func (r *BookPostgres) UpdateBook(book model.Book) error{
 			"name": book.Name,
 			"id": 	book.Id,
 		})
-		log.Printf("Book was updated, %s", book)
 		if err != nil {
-			log.Fatalf("Error during exec on updating book, %s", err)
+			logrus.Errorf("Error during exec on updating book, %s", err)
 			return err
 		}
 	}
@@ -90,15 +89,14 @@ func (r *BookPostgres) UpdateBook(book model.Book) error{
 			"author": book.Author,
 			"id": 	book.Id,
 		})
-		log.Printf("Book was updated, %s", book)
 		if err != nil {
-			log.Fatalf("Error during exec on updating book, %s", err)
+			logrus.Errorf("Error during exec on updating book, %s", err)
 			return err
 		}
 	}
 
 	if book.Name == "" && book.Author == ""{
-		log.Printf("Nothing to update")
+		logrus.Printf("Nothing to update")
 	}
 
 	return nil
@@ -109,7 +107,7 @@ func (r *BookPostgres) DeleteBook(id int) error{
 
 	_, err := r.db.Exec(query, id)
 	if err != nil {
-		log.Fatalf("error during deleting book by id, %s", err)
+		logrus.Errorf("error during deleting book by id, %s", err)
 		return nil
 	}
 
