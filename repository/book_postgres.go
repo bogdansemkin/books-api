@@ -36,6 +36,7 @@ func (r *BookPostgres) GetBookById(id int) (model.Book, error){
 		log.Fatalf("error during getting data to book model on get book by id, %s", err)
 		return model.Book{}, err
 	}
+
 	return book, nil
 }
 
@@ -54,6 +55,52 @@ func (r *BookPostgres) CreateBook(book model.Book)  (int, error){
 }
 
 func (r *BookPostgres) UpdateBook(book model.Book) error{
+	var query string
+	log.Printf("Book on updateBook postgres, %s", book)
+	if book.Name == "" {
+		query = fmt.Sprintf("UPDATE %s SET author=:author WHERE id=:id", booksTable)
+		_, err := r.db.NamedExec(query, map[string]interface{}{
+			"author": book.Author,
+			"id": 	book.Id,
+		})
+		log.Printf("Book was updated, %s", book)
+		if err != nil {
+			log.Fatalf("Error during exec on updating book, %s", err)
+			return err
+		}
+	}
+
+	if book.Author == ""{
+		query = fmt.Sprintf("UPDATE %s SET name=:name WHERE id=:id", booksTable)
+		_, err := r.db.NamedExec(query, map[string]interface{}{
+			"name": book.Name,
+			"id": 	book.Id,
+		})
+		log.Printf("Book was updated, %s", book)
+		if err != nil {
+			log.Fatalf("Error during exec on updating book, %s", err)
+			return err
+		}
+	}
+
+	if book.Name != "" && book.Author != ""{
+		query = fmt.Sprintf("UPDATE %s SET name=:name, author=:author WHERE id=:id", booksTable)
+		_, err := r.db.NamedExec(query, map[string]interface{}{
+			"name": book.Name,
+			"author": book.Author,
+			"id": 	book.Id,
+		})
+		log.Printf("Book was updated, %s", book)
+		if err != nil {
+			log.Fatalf("Error during exec on updating book, %s", err)
+			return err
+		}
+	}
+
+	if book.Name == "" && book.Author == ""{
+		log.Printf("Nothing to update")
+	}
+
 	return nil
 }
 

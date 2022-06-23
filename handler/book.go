@@ -41,11 +41,22 @@ func (h *Handler) create(c *gin.Context) {
 	}
 	h.services.CreateBook(book)
 
-	c.JSON(http.StatusOK, "User was created successfully")
+	c.JSON(http.StatusOK, "Book was created successfully")
 }
 
 func (h *Handler) update(c *gin.Context) {
+	book := model.Book{}
+	id := c.Param("id")
 
+	err := c.BindJSON(&book)
+	if err != nil{
+		log.Fatalf("error during binding JSON, %s", err)
+		return
+	}
+	book.Id, _ = strconv.Atoi(id)
+
+	log.Printf("Book on update handler, %s", book)
+	h.services.UpdateBook(book)
 }
 
 func (h *Handler) delete(c *gin.Context) {
