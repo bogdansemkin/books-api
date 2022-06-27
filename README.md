@@ -1,4 +1,4 @@
-##Start with dockerfile
+# Start with dockerfile
 
 `
 docker run books-api
@@ -7,7 +7,7 @@ docker run books-api
 `migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
 `
 
-#Start with docker-compose
+## Start with docker-compose
 `docker-compose up`
 
 
