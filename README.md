@@ -2,8 +2,9 @@
 
 `
 docker run books-api
-docker run --name=book-db -e POSTGRES_PASSWORD='qwerty' -p 5436:5432 -d --rm postgres
-migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
+`
+`docker run --name=book-db -e POSTGRES_PASSWORD='qwerty' -p 5436:5432 -d --rm postgres`
+`migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
 `
 
 #Start with docker-compose
