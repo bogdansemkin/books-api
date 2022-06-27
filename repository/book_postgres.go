@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
-	"log"
 )
 
 type BookPostgres struct {
@@ -57,7 +56,6 @@ func (r *BookPostgres) CreateBook(book model.Book)  (int, error){
 
 func (r *BookPostgres) UpdateBook(book model.Book) error{
 	var query string
-	log.Printf("Book on updateBook postgres, %s", book)
 	if book.Name == "" {
 		query = fmt.Sprintf("UPDATE %s SET author=:author WHERE id=:id", booksTable)
 		_, err := r.db.NamedExec(query, map[string]interface{}{

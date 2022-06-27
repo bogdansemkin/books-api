@@ -5,6 +5,8 @@ import (
 	"books-api/repository"
 )
 
+//go:generate mockgen -source=service.go -destination=mocks/mock.go
+
 type Authorization interface {
 	Create(user model.User) (int, error)
 	Get(name, password string) (model.User, error)
