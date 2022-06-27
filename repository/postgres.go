@@ -30,6 +30,7 @@ func NewPostgresDB(cfg Config) (*sqlx.DB, error){
 	}
 	err = db.Ping()
 	if err != nil{
+		logrus.Printf("Port is: %s, %s", cfg.Host, cfg.Port )
 		logrus.Errorf("Error during binding to database : %s", err)
 		return nil, err
 	}

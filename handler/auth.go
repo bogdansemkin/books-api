@@ -12,12 +12,12 @@ func (h *Handler) signUp(c *gin.Context) {
 
 	err := c.BindJSON(&user)
 	if err != nil{
-		logrus.Errorf("Error on binding JSON, %s", err)
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
 		return
 	}
-	id, err  := h.services.Create(user)
+	id, err  := h.services.Authorization.Create(user)
 	if err != nil {
-		logrus.Errorf("Error on creating user, %s", err)
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 	c.JSON(http.StatusOK, map[string]int{
@@ -33,7 +33,7 @@ func (h *Handler) signIn(c *gin.Context) {
 		logrus.Errorf("Error on binding JSON, %s", err)
 		return
 	}
-	token, err := h.services.Get(user.Name, user.Password)
+	token, err := h.services.Authorization.Get(user.Name, user.Password)
 	if err != nil {
 		logrus.Errorf("Error on getting user data, %s", err)
 		return

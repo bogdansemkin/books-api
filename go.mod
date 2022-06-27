@@ -4,18 +4,23 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.8.1
+	github.com/golang/mock v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.2.0
+	github.com/magiconair/properties v1.8.6
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.12.0
+	github.com/stretchr/testify v1.7.2
 	github.com/subosito/gotenv v1.3.0
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe
 	github.com/swaggo/gin-swagger v1.5.0
 	github.com/swaggo/swag v1.8.3
+	github.com/zhashkevych/go-sqlxmock v1.5.1
 )
 
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
@@ -30,7 +35,6 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
-	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
@@ -38,6 +42,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
