@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"books-api/service"
+	"books-api/pkg/service"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

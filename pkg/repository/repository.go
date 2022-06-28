@@ -1,11 +1,9 @@
-package service
+package repository
 
 import (
-	"books-api/model"
-	"books-api/repository"
+	"books-api/pkg/model"
+	"github.com/jmoiron/sqlx"
 )
-
-//go:generate mockgen -source=service.go -destination=mocks/mock.go
 
 type Authorization interface {
 	Create(user model.User) (int, error)
@@ -20,14 +18,14 @@ type Book interface {
 	DeleteBook(id int) error
 }
 
-type Service struct{
+type Repository struct {
 	Authorization
 	Book
 }
 
-func NewService(repos *repository.Repository) *Service{
-	return &Service{
-		Authorization: NewAuthService(repos.Authorization),
-		Book: NewBookService(repos.Book),
+func NewRepository(db *sqlx.DB) *Repository{
+	return &Repository{
+		Authorization: NewAuthPostgres(db),
+		Book: 		   NewBookPostgres(db),
 	}
 }

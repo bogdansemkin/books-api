@@ -1,8 +1,8 @@
 package service
 
 import (
-	"books-api/model"
-	"books-api/repository"
+	"books-api/pkg/model"
+	"books-api/pkg/repository"
 )
 
 type BookService struct {

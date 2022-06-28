@@ -1,11 +1,11 @@
 package main
 
 import (
-
-	"books-api/handler"
-	"books-api/repository"
+	"books-api/pkg/handler"
+	"books-api/pkg/repository"
+	"books-api/pkg/service"
 	"books-api/server"
-	"books-api/service"
+
 	"fmt"
 	"github.com/spf13/viper"
 	"github.com/subosito/gotenv"

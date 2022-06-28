@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"books-api/model"
+	"books-api/pkg/model"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"net/http"
