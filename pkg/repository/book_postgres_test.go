@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"books-api/model"
+	"books-api/pkg/model"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	sqlmock "github.com/zhashkevych/go-sqlxmock"

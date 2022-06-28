@@ -5,7 +5,7 @@
 package mock_service
 
 import (
-	model "books-api/model"
+	model "books-api/pkg/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

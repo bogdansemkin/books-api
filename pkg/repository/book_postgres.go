@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"books-api/model"
+	"books-api/pkg/model"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"

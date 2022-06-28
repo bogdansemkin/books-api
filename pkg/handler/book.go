@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"books-api/model"
+	"books-api/pkg/model"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"net/http"
@@ -20,7 +20,7 @@ import (
 // @Failure default
 // @Router /books/ [get]
 func (h *Handler) getAll(c *gin.Context) {
-	book, err := h.services.GetAllBooks()
+	book, err := h.services.Book.GetAllBooks()
 	if err != nil {
 		logrus.Errorf("Error on getAll handler, %s", err)
 		return
